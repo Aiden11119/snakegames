@@ -47,7 +47,7 @@ export class Gamecontrol {
         }
         if (x > 340 || x < 0 || y > 340 || y < 0) {
             this.live = false;
-            alert("gameover!!!");
+            alert("Gameover!!!Snake’s head hits a wall.");
             const bestscore = JSON.parse(localStorage.getItem("bestscore") || "0");
             if (this.scorepanel.score > bestscore) {
                 localStorage.setItem("bestscore", JSON.stringify(this.scorepanel.getscore()));
@@ -61,7 +61,7 @@ export class Gamecontrol {
         //要给蛇走了之后才能判断crash
         if (this.snake.crash()) {
             this.live = false;
-            alert("gameover!!!");
+            alert("Gameover!!!Snake’s head collides with its own body.");
             const bestscore = JSON.parse(localStorage.getItem("bestscore") || "0");
             if (this.scorepanel.score > bestscore) {
                 localStorage.setItem("bestscore", JSON.stringify(this.scorepanel.getscore()));
