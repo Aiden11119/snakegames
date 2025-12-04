@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>贪吃蛇</title>
+        <link href="./css/index.css" rel="stylesheet"> 
+    </head>
+
+    <body>
+
+        <div id="snake-rules" class="rules-container" role="region" aria-label="Snake game rules">
+            <h1>🎮 Snake Game Rules</h1>
+            
+            
+            <h2>1. Basic Gameplay</h2>
+            <p class="muted">You control a continuously moving snake using the arrow keys (Up, Down, Left, Right). Eat food to grow longer and increase your score.</p>
+            
+            
+            <h2>2. Scoring</h2>
+            <ul>
+            <li>Each food eaten gives <strong>+1 point</strong>.</li>
+            <li>Every time your total score reaches <strong>10 points</strong>, you <strong>level up</strong>.</li>
+            <li>The maximum level is <strong>Level 10</strong>.</li>
+            </ul>
+            
+            
+            <h2>3. Level &amp; Speed</h2>
+            <ul>
+            <li>Each time you level up, the snake’s movement <strong>speed increases</strong>.</li>
+            <li>After reaching <strong>Level 10</strong>, the speed no longer increases (but you may continue to earn points if desired).</li>
+            </ul>
+            
+            
+            <h2>4. Game Over Conditions</h2>
+            <ul>
+            <li>The game ends immediately if the snake’s head <strong>hits a wall</strong>.</li>
+            <li>The game ends immediately if the snake’s head <strong>collides with its own body</strong>.</li>
+            </ul>
+            
+            
+            <h2>5. Optional Win Condition</h2>
+            <p class="muted">You can optionally define a win condition such as reaching Level 10 and surviving for a set duration, or simply play until the snake dies.</p>
+            
+            
+            </div>
+
+        <div id="main">
+            <div id="stage">
+                <div id="snake">
+                    <div></div>
+                </div>
+
+                <div id="food"></div>
+
+            </div>
+
+            <div id="score-panel">
+                <div>
+                    SCORE:<span id="score">0</span>
+                </div>
+                <div>
+                    <button id="play"></button>
+                </div>
+                <div>
+                    LEVEL:<span id="level">1</span>
+                </div>
+
+
+            </div>
+            
+        </div>
+
+        <div id="history" style="text-align: center;">
+            <h2>BEST RESULT</h2>
+            <div id="bestscore">Score:</div>
+            <div id="bestlevel">Level:</div>
+        </div>
+
+
+        <script type="module">
+           import { Gamecontrol } from './dist/gamecontrol.js';
+
+            const bestscore=JSON.parse(localStorage.getItem("bestscore")||"0");
+            const bestlevel=JSON.parse(localStorage.getItem("bestlevel")||"1");
+            document.getElementById("bestscore").innerHTML=`Score: ${bestscore}`;
+            document.getElementById("bestlevel").innerHTML=`Level: ${bestlevel}`;
+
+            document.getElementById("play").addEventListener("click", start);
+
+            let stop=true;
+            let x = null;
+
+            function start() {
+            if(!x)
+            {
+                x = new Gamecontrol();
+            }
+            if (stop) {
+                document.getElementById("play").classList.add("paused");
+                x.live = true; // 继续
+                x.run();
+                stop=false;
+
+
+            } 
+            
+            else {
+                document.getElementById("play").classList.remove("paused");
+                x.live = false; // 暂停
+                stop=true;
+            }
+
+        }
+
+
+        </script>
+    </body>
+</html>

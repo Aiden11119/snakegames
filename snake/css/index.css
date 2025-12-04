@@ -1,0 +1,158 @@
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    height: 100vh;
+    display: flex;           
+    justify-content: space-between; 
+    align-items: center;  
+    font: bold 20px;
+    font-family: 'Courier New', Courier, monospace;    
+}
+
+#main {
+    width: 500px;
+    height: 500px;
+    background-color: pink;
+    border: 10px solid black;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#stage{
+    width: 354px;
+    height: 354px;
+    border: 2px solid black;
+    margin: auto;
+    position: relative;
+
+    #snake {
+        & > div {
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border: 1px solid pink;
+            position: absolute;
+        }
+    
+        /* 第一个 div = 蛇头（absolute 保留） */
+        & > div:nth-of-type(1) {
+            position: absolute;     /* 保持绝对定位 */
+            background-color: green;
+            border-radius: 2px;
+    
+            /* 微三角形蛇头（向右） */
+            clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+    
+            /* IMPORTANT：为了让眼睛定位，但不会影响蛇头 absolute */
+            &::before,
+            &::after {
+                position: absolute;
+                content: "";
+                width: 2px;
+                height: 2px;
+                background: white;
+                border-radius: 50%;
+                top: 2px;
+            }
+    
+            &::before {
+                left: 2px;
+            }
+    
+            &::after {
+                left: 6px;
+            }
+        }
+    }
+
+    #food{
+        width: 10px;
+        height: 10px;
+        background-color: black;
+        border: 1px solid pink;
+        position: absolute;
+        left: 150px;
+        top: 120px;
+    }
+
+    
+    
+}
+
+
+#score-panel{
+    
+    width: 90%;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+
+}
+
+#snake-rules {
+    width: 400px;
+    padding: 10px;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #333;
+}
+
+#history
+{
+    width: 300px;
+}
+
+#play {
+    width: 60px;
+    height: 60px;
+    background-color: #4CAF50;  /* 绿色按钮 */
+    border-radius: 50%;          /* 圆形 */
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* 鼠标悬停效果 */
+#play:hover {
+    background-color: #66BB6A;
+    transform: scale(1.1);
+}
+
+/* 播放符号（三角形） */
+#play::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 15px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 20px solid white;
+}
+
+#play.paused::before {
+    content: "";
+    position: absolute;
+    left: 19px;
+    top: 14px;
+    width: 6px;
+    height: 30px;
+    background-color: white;
+    border: none;
+    box-shadow: 12px 0 0 white; /* 第二条竖条 */
+    border-radius: 2px;
+}
