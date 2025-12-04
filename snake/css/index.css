@@ -11,7 +11,6 @@ body {
     display: flex;           
     justify-content: space-between; 
     align-items: center;  
-    font: bold 20px;
     font-family: 'Courier New', Courier, monospace;    
 }
 
@@ -155,4 +154,5 @@ body {
     border: none;
     box-shadow: 12px 0 0 white; /* 第二条竖条 */
     border-radius: 2px;
+
 }
